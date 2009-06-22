@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\encog-cs\encog-test\Encog-test.nunit" total="1" errors="0" failures="1" not-run="0" ignored="0" skipped="0" invalid="0" date="2009-06-22" time="11:22:40">
+  <environment nunit-version="2.5.0.9122" clr-version="2.0.50727.3082" os-version="Microsoft Windows NT 5.1.2600 Service Pack 3" platform="Win32NT" cwd="C:\encog-cs\encog-test" machine-name="JEFF-F9BE40219C" user="Administrator" user-domain="JEFF-F9BE40219C" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite name="C:\encog-cs\encog-test\Encog-test.nunit" executed="True" success="False" time="4.875" asserts="0">
+    <results>
+      <test-suite name="C:\encog-cs\encog-test\encog-test\bin\Release\encog-test.dll" executed="True" success="False" time="4.844" asserts="0">
+        <results>
+          <test-suite name="encog_test" executed="True" success="False" time="4.844" asserts="0">
+            <results>
+              <test-suite name="Data" executed="True" success="False" time="4.844" asserts="0">
+                <results>
+                  <test-suite name="Market" executed="True" success="False" time="4.844" asserts="0">
+                    <results>
+                      <test-suite name="TestMarketData" executed="True" success="False" time="4.625" asserts="0">
+                        <results>
+                          <test-case name="encog_test.Data.Market.TestMarketData.MarketData" executed="True" success="False" time="4.578" asserts="65">
+                            <failure>
+                              <message><![CDATA[  Expected: -0.059999999999999998d
+  But was:  -0.060999999999999999d
+]]></message>
+                              <stack-trace><![CDATA[at encog_test.Data.Market.TestMarketData.MarketData() in C:\encog-cs\encog-test\encog-test\Encog\Market\TestMarketData.cs:line 118
+]]></stack-trace>
+                            </failure>
+                          </test-case>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
