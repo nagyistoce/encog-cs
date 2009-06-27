@@ -61,9 +61,10 @@ namespace encog_test.Neural.Networks
         public static BasicNetwork CreateThreeLayerNet()
         {
             BasicNetwork network = new BasicNetwork();
-            //network.AddLayer(new FeedforwardLayer(2));
-            //network.AddLayer(new FeedforwardLayer(3));
-            //network.AddLayer(new FeedforwardLayer(1));
+            network.AddLayer(new BasicLayer(2));
+            network.AddLayer(new BasicLayer(3));
+            network.AddLayer(new BasicLayer(1));
+            network.Structure.FinalizeStructure();
             network.Reset();
             return network;
         }

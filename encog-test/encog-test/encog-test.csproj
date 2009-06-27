@@ -54,13 +54,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Encog\Data\TestCSVNeuralData.cs" />
-    <Compile Include="Encog\Market\Loader\TestYahooLoader.cs" />
-    <Compile Include="Encog\Market\TestMarketData.cs" />
+    <Compile Include="Encog\Data\SQL\TestSQLDataSet.cs" />
+    <Compile Include="Encog\Data\Temporal\TestTemporal.cs" />
+    <Compile Include="Encog\Data\CSV\TestCSVNeuralData.cs" />
+    <Compile Include="Encog\Data\Market\Loader\TestYahooLoader.cs" />
+    <Compile Include="Encog\Data\Market\TestMarketData.cs" />
+    <Compile Include="Encog\Data\XML\TestXMLNeuralData.cs" />
     <Compile Include="Encog\Matrix\TestBiPolarUtil.cs" />
     <Compile Include="Encog\Matrix\TestMatrix.cs" />
     <Compile Include="Encog\Matrix\TestMatrixMath.cs" />
+    <Compile Include="Encog\Neural\Networks\CreateNetwork.cs" />
+    <Compile Include="Encog\Neural\Networks\Training\TestAnneal.cs" />
+    <Compile Include="Encog\Neural\Networks\Training\TestBackpropagation.cs" />
+    <Compile Include="Encog\Neural\Networks\Training\TestCompetitive.cs" />
+    <Compile Include="Encog\Neural\Networks\Training\TestGenetic.cs" />
     <Compile Include="Encog\Neural\Networks\XOR.cs" />
+    <Compile Include="Encog\Neural\Persist\TestPersist.cs" />
+    <Compile Include="Encog\Neural\Persist\TestSort.cs" />
+    <Compile Include="Encog\Util\TestSerializeObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

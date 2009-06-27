@@ -19,7 +19,7 @@ namespace encog_test.Matrix
 			{3},
 			{4}
 		};
-
+   
             Encog.Matrix.Matrix matrix1 = new Encog.Matrix.Matrix(matrixData1);
             Encog.Matrix.Matrix checkMatrix = new Encog.Matrix.Matrix(matrixData2);
 
