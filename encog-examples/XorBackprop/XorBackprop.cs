@@ -25,12 +25,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Encog.Neural.Networks;
-using Encog.Neural.Data;
 using Encog.Neural.Networks.Layers;
-using Encog.Neural.Networks.Training;
-using Encog.Neural.Networks.Training.Backpropagation;
-using Encog.Neural.Data.Basic;
+using Encog.Neural.Activation;
 using Encog.Neural.NeuralData;
+using Encog.Neural.Data.Basic;
+using Encog.Neural.Networks.Training;
+using Encog.Neural.Networks.Training.Propagation.Back;
+using Encog.Neural.Data;
 
 namespace XorBackprop
 {
@@ -64,10 +65,11 @@ namespace XorBackprop
         static void Main(string[] args)
         {
             BasicNetwork network = new BasicNetwork();
-		network.AddLayer(new FeedforwardLayer(2));
-		network.AddLayer(new FeedforwardLayer(3));
-		network.AddLayer(new FeedforwardLayer(1));
-		network.Reset();
+            network.AddLayer(new BasicLayer(new ActivationSigmoid(), true, 2));
+            network.AddLayer(new BasicLayer(new ActivationSigmoid(), true, 3));
+            network.AddLayer(new BasicLayer(new ActivationSigmoid(), true, 1));
+            network.Structure.FinalizeStructure();
+            network.Reset();
 
 		INeuralDataSet trainingSet = new BasicNeuralDataSet(XOR_INPUT, XOR_IDEAL);
 		

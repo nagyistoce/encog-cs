@@ -25,7 +25,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Encog.Neural.Genetic;
 using Encog.Solve.Genetic;
 
 namespace GeneticTSP
@@ -60,7 +59,7 @@ namespace GeneticTSP
             {
 
                 TSPChromosome c = new TSPChromosome(this, cities);
-                SetChromosome(i, c);
+                this.Chromosomes[i] = c;
             }
             SortChromosomes();
         }

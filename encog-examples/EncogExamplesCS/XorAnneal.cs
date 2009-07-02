@@ -30,6 +30,7 @@ using Encog.Neural.Data;
 using Encog.Neural.Networks.Training.Anneal;
 using Encog.Neural.Data.Basic;
 using Encog.Neural.NeuralData;
+using Encog.Neural.Activation;
 
 namespace EncogExamplesCS
 {
@@ -63,10 +64,11 @@ namespace EncogExamplesCS
         static void Main(string[] args)
         {
             BasicNetwork network = new BasicNetwork();
-		network.AddLayer(new FeedforwardLayer(2));
-		network.AddLayer(new FeedforwardLayer(3));
-		network.AddLayer(new FeedforwardLayer(1));
-		network.Reset();
+            network.AddLayer(new BasicLayer(new ActivationSigmoid(), true, 2));
+            network.AddLayer(new BasicLayer(new ActivationSigmoid(), true, 3));
+            network.AddLayer(new BasicLayer(new ActivationSigmoid(), true, 1));
+            network.Structure.FinalizeStructure();
+            network.Reset();
 
 		INeuralDataSet trainingSet = new BasicNeuralDataSet(XOR_INPUT, XOR_IDEAL);
 		

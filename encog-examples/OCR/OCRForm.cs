@@ -19,17 +19,30 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.IO;
+using Encog.Neural.Data.Basic;
+using Encog.Neural.NeuralData;
 using Encog.Neural.Networks;
 using Encog.Neural.Networks.Layers;
-using Encog.Util;
-using Encog.Neural.NeuralData;
-using Encog.Neural.Data.Basic;
-using Encog.Neural.Networks.Training.SOM;
+using Encog.Neural.Activation;
+using Encog.Neural.Data;
+using Encog.Neural.Networks.Training.Competitive;
+using Encog.Neural.Networks.Training.Competitive.Neighborhood;
+using Encog.Util.MathUtil.RBF;
+
 
 namespace Chapter12OCR
 {
     public partial class OCRForm : Form
     {
+        /// <summary>
+        /// Delegate to update the status from another thread.
+        /// </summary>
+        /// <param name="tries">Tries attempted so far.</param>
+        /// <param name="error">Current error rate.</param>
+        public delegate void UpdateStatusDelegate(int tries, double error);
+
+        private bool training;
+
         /// <summary>
         /// The downsample width for the application.
         /// </summary>
@@ -156,30 +169,40 @@ namespace Chapter12OCR
 
         private void btnBeginTraining_Click(object sender, EventArgs e)
         {
-            int inputCount = OCRForm.DOWNSAMPLE_HEIGHT * OCRForm.DOWNSAMPLE_WIDTH;
-
-            this.trainingSet = new BasicNeuralDataSet();
-    
-            foreach (char ch in this.letterData.Keys)
+            if (!this.training)
             {
-                BasicNeuralData item = new BasicNeuralData(inputCount);
+                int inputCount = OCRForm.DOWNSAMPLE_HEIGHT * OCRForm.DOWNSAMPLE_WIDTH;
 
-                bool[] data = this.letterData[ch];
-                for (int i = 0; i < inputCount; i++)
+                this.trainingSet = new BasicNeuralDataSet();
+
+                foreach (char ch in this.letterData.Keys)
                 {
-                    item[i] = data[i] ? 0.5 : -0.5;
+                    BasicNeuralData item = new BasicNeuralData(inputCount);
+
+                    bool[] data = this.letterData[ch];
+                    for (int i = 0; i < inputCount; i++)
+                    {
+                        item[i] = data[i] ? 0.5 : -0.5;
+                    }
+                    this.trainingSet.Add(item);
                 }
-                this.trainingSet.Add(item);
+
+                this.network = new BasicNetwork();
+                this.network.AddLayer(new BasicLayer(new ActivationLinear(), false,
+                        this.downsampled.Length));
+                this.network.AddLayer(new BasicLayer(new ActivationLinear(), false,
+                        this.letterData.Count));
+                this.network.Structure.FinalizeStructure();
+                this.network.Reset();
+                this.training = true;
+
+                Thread thread = new Thread(TrainNetwork);
+                thread.Start();
             }
-
-            this.network = new BasicNetwork();
-			this.network.AddLayer(new SOMLayer(this.downsampled.Length,NormalizationType.MULTIPLICATIVE));
-			this.network.AddLayer(new BasicLayer(this.letterData.Count));	
-			this.network.Reset();
-
-			
-
-            this.TrainNetwork();
+            else
+            {
+                this.training = false;
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -360,19 +383,35 @@ namespace Chapter12OCR
 
         public void TrainNetwork()
         {
-             TrainSelfOrganizingMap train = new TrainSelfOrganizingMap(
-					this.network, trainingSet,Encog.Neural.Networks.Training.SOM.TrainSelfOrganizingMap.LearningMethod.SUBTRACTIVE,0.5);
-			int tries = 1;
-
+            
+              CompetitiveTraining train = new CompetitiveTraining(this.network,
+					0.25, trainingSet, new NeighborhoodGaussian(
+							new GaussianFunction(0, 1, 2)));			
+            int tries = 1;
+            
 			do {
-				train.Iteration();
-                this.txtTries.Text = "" + tries;
-                this.txtBestError.Text = "" + train.BestError;
-                this.txtLastError.Text = "" + train.TotalError;
-                tries++;
-			} while ((train.TotalError > MAX_ERROR) );
+                try
+                {
+                    train.Iteration();
+                    this.Invoke(new UpdateStatusDelegate(UpdateStatus), new object[] { tries, train.Error });
+
+                    tries++;
+                    double e = train.Error;
+                }
+                catch (Exception )
+                {
+                    // just exist if there is an error
+                    break;
+                }
+			} while ((train.Error > MAX_ERROR) && this.training );
 
             MessageBox.Show("Training complete.");
+        }
+
+        public void UpdateStatus(int tries, double error)
+        {
+            this.txtTries.Text = "" + tries;
+            this.txtCurrentError.Text = "" + error.ToString("#0.00");
         }
 
         /// <summary>

@@ -24,8 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-using Encog.Neural.Genetic;
+using Encog.Solve.Genetic;
 
 namespace GeneticTSP
 {
@@ -48,7 +47,7 @@ namespace GeneticTSP
         public TSPChromosome(TSPGeneticAlgorithm owner, City[] cities)
         {
             Random rand = new Random();
-            this.GA = owner;
+            this.GeneticAlgorithm = owner;
 
             this.cities = cities;
 
@@ -92,8 +91,8 @@ namespace GeneticTSP
             double cost = 0.0;
             for (int i = 0; i < this.cities.Length - 1; i++)
             {
-                double dist = this.cities[this.GetGene(i)]
-                       .Proximity(this.cities[GetGene(i + 1)]);
+                double dist = this.cities[this.Genes[i]]
+                       .Proximity(this.cities[this.Genes[i + 1]]);
                 cost += dist;
             }
             this.Cost = cost;
@@ -108,9 +107,9 @@ namespace GeneticTSP
             int length = this.Genes.Length;
             int iswap1 = (int)(rand.NextDouble() * length);
             int iswap2 = (int)(rand.NextDouble() * length);
-            int temp = GetGene(iswap1);
-            SetGene(iswap1, GetGene(iswap2));
-            SetGene(iswap2, temp);
+            int temp = this.Genes[iswap1];
+            this.Genes[iswap1] = this.Genes[iswap2];
+            this.Genes[iswap2] = temp;
         }
 
     }

@@ -104,7 +104,7 @@ namespace GeneticTSP
         /// </summary>
         public void DisplaySolution()
         {
-            int[] path = genetic.GetChromosome(0).Genes;
+            int[] path = genetic.Chromosomes[0].Genes;
             for (int i = 0; i < path.Length; i++)
             {
                 if (i != 0)
@@ -145,7 +145,7 @@ namespace GeneticTSP
             {
                 genetic.Iteration();
 
-                double thisSolution = genetic.GetChromosome(0).Cost;
+                double thisSolution = genetic.Chromosomes[0].Cost;
 
                 builder.Length = 0;
                 builder.Append("Iteration: ");

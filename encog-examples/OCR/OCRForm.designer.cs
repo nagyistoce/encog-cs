@@ -43,10 +43,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.txtTries = new System.Windows.Forms.Label();
-            this.txtLastError = new System.Windows.Forms.Label();
-            this.txtBestError = new System.Windows.Forms.Label();
+            this.txtCurrentError = new System.Windows.Forms.Label();
             this.sample = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
@@ -193,18 +191,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(12, 282);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 13);
+            this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 14;
-            this.label5.Text = "Last Error:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 309);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 13);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Best Error:";
+            this.label5.Text = "Current Error:";
             // 
             // txtTries
             // 
@@ -215,23 +204,14 @@
             this.txtTries.TabIndex = 16;
             this.txtTries.Text = "0";
             // 
-            // txtLastError
+            // txtCurrentError
             // 
-            this.txtLastError.AutoSize = true;
-            this.txtLastError.Location = new System.Drawing.Point(78, 282);
-            this.txtLastError.Name = "txtLastError";
-            this.txtLastError.Size = new System.Drawing.Size(13, 13);
-            this.txtLastError.TabIndex = 17;
-            this.txtLastError.Text = "0";
-            // 
-            // txtBestError
-            // 
-            this.txtBestError.AutoSize = true;
-            this.txtBestError.Location = new System.Drawing.Point(78, 309);
-            this.txtBestError.Name = "txtBestError";
-            this.txtBestError.Size = new System.Drawing.Size(13, 13);
-            this.txtBestError.TabIndex = 18;
-            this.txtBestError.Text = "0";
+            this.txtCurrentError.AutoSize = true;
+            this.txtCurrentError.Location = new System.Drawing.Point(78, 282);
+            this.txtCurrentError.Name = "txtCurrentError";
+            this.txtCurrentError.Size = new System.Drawing.Size(13, 13);
+            this.txtCurrentError.TabIndex = 17;
+            this.txtCurrentError.Text = "0";
             // 
             // sample
             // 
@@ -247,10 +227,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 331);
             this.Controls.Add(this.sample);
-            this.Controls.Add(this.txtBestError);
-            this.Controls.Add(this.txtLastError);
+            this.Controls.Add(this.txtCurrentError);
             this.Controls.Add(this.txtTries);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -290,10 +268,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label txtTries;
-        private System.Windows.Forms.Label txtLastError;
-        private System.Windows.Forms.Label txtBestError;
+        private System.Windows.Forms.Label txtCurrentError;
         private System.Windows.Forms.Panel sample;
     }
 }
