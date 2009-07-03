@@ -41,7 +41,7 @@ namespace encog_test.Neural.Networks.Training
         [Test]
         public void TestSOM()
         {
-            Logging.stopConsoleLogging();
+            Logging.StopConsoleLogging();
 
             // create the training set
             INeuralDataSet training = new BasicNeuralDataSet(
