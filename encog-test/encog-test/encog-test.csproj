@@ -54,10 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Encog\Data\Market\TestYahooLoader.cs" />
     <Compile Include="Encog\Data\SQL\TestSQLDataSet.cs" />
     <Compile Include="Encog\Data\Temporal\TestTemporal.cs" />
     <Compile Include="Encog\Data\CSV\TestCSVNeuralData.cs" />
-    <Compile Include="Encog\Data\Market\Loader\TestYahooLoader.cs" />
     <Compile Include="Encog\Data\Market\TestMarketData.cs" />
     <Compile Include="Encog\Data\XML\TestXMLNeuralData.cs" />
     <Compile Include="Encog\Matrix\TestBiPolarUtil.cs" />
